@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>123</title>
+	<link rel="stylesheet" href="dist/jquery.fancybox.min.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="dist/jquery.fancybox.min.js"></script>
+	<style>
+		.xxx { height:300px; }	
+		.xxx img { height:100%; }	
+	</style>
+	
+</head>
+<body>
+	<div class="xxx">
+		<a data-fancybox="gallery" href="img/Screenshot (1).png" data-thumbnail = "img/Screenshot (4).png" data-caption="<button onclick='console.log(48);'>123</button>"><img src="img/Screenshot (1).png" /></a>
+		<a data-fancybox="gallery" href="img/Screenshot (2).png" data-thumbnail = "img/Screenshot (5).png"  data-caption="fox1"><img src="img/Screenshot (2).png" /></a>
+		<a data-fancybox="gallery" href="img/Screenshot (3).png" data-thumbnail = "img/Screenshot (6).png"  data-caption="fox1"><img src="img/Screenshot (3).png" /></a>
+	</div>
+</body>
+<script>
+		$('[data-fancybox="gallery"]').fancybox({
+		  
+     prevEffect : 'none', 
+     nextEffect : 'none', 
+     helpers : { 
+      thumbs : { 
+       width : 50, 
+       height : 50, 
+       source : function (current) { 
+        return $(current.element).data('thumbnail'); 
+       }, 
+      }, 
+      title : { 
+       type : 'outside' 
+
+      } 
+     } 
+    });
+	</script>
+</html>

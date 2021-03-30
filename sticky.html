@@ -1,0 +1,118 @@
+<html>
+
+<head>
+<title>sticky javascript: Исходный вариант</title>
+<style>
+body {
+  background: #aba;
+}
+header, main, footer {
+  display: block;
+  max-width: 740px;
+  margin: 0 auto;
+}
+header {
+  margin-bottom: 15px;
+  font-size: 200%;
+  background: #456;
+  text-align: center;
+}
+header a {
+  color: #fff;
+}
+article {
+  display: block;
+  float: left;
+  width: 485px;
+  height: 1000px;
+  background: #fff;
+}
+aside {
+  display: block;
+  margin-left: 500px;
+  box-shadow: 0 0 0 1px #cff inset;
+  background: #cdc;
+}
+footer {
+  position: relative;
+  top: 15px;
+  margin-bottom: 15px;
+  clear: both;
+  height: 800px;
+  background: #456;
+}
+</style>
+</head>
+
+<body>
+  <header>
+    <a href="http://shpargalkablog.ru/2013/09/scroll-block.html">sticky javascript</a>
+  </header>
+  <div style="clear:both;"></div>
+  <main>
+    <article id="article"><h1>Исходный вариант</h1></article>
+    <div><span>123</span><aside id="have_question">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20</aside></div>
+  </main>
+<footer></footer>
+<div style="clear:both; padding-bottom:0.25em"></div>
+    
+
+</body>
+<style>
+.sticky {
+  position: fixed;
+  z-index: 101;
+}
+.stop {
+  position: relative;
+  z-index: 101;
+}
+</style>
+
+<script>
+(function(){
+  var a = document.querySelector('#have_question'), b = null, P = 0;
+  window.addEventListener('scroll', Ascroll, false);
+  document.body.addEventListener('scroll', Ascroll, false);
+  function Ascroll() {
+    if (b == null) {
+      var Sa = getComputedStyle(a, ''), s = '';
+      for (var i = 0; i < Sa.length; i++) {
+        if (Sa[i].indexOf('overflow') == 0 || Sa[i].indexOf('padding') == 0 || Sa[i].indexOf('border') == 0 || Sa[i].indexOf('outline') == 0 || Sa[i].indexOf('box-shadow') == 0 || Sa[i].indexOf('background') == 0) {
+          s += Sa[i] + ': ' +Sa.getPropertyValue(Sa[i]) + '; '
+        }
+      }
+      b = document.createElement('div');
+      b.style.cssText = s + ' box-sizing: border-box; width: ' + a.offsetWidth + 'px;';
+      a.insertBefore(b, a.firstChild);
+      var l = a.childNodes.length;
+      for (var i = 1; i < l; i++) {
+        b.appendChild(a.childNodes[1]);
+      }
+      a.style.height = b.getBoundingClientRect().height + 'px';
+      a.style.padding = '0';
+      a.style.border = '0';
+    }
+    var Ra = a.getBoundingClientRect(),
+        R = Math.round(Ra.top + b.getBoundingClientRect().height - document.querySelector('#article').getBoundingClientRect().bottom);  // селектор блока, при достижении нижнего края которого нужно открепить прилипающий элемент
+            console.log(Ra.top - P-R);
+
+    if ((Ra.top - P) <= 0) {
+      if ((Ra.top - P) <= R) {
+        b.className = 'stop';
+        b.style.top = - R +'px';
+      } else {
+        b.className = 'sticky';
+        b.style.top = P + 'px';
+      }
+    } else {
+      b.className = '';
+      b.style.top = '';
+    }
+    window.addEventListener('resize', function() {
+      a.children[0].style.width = getComputedStyle(a, '').width
+    }, false);
+  }
+})()
+</script>
+</html>

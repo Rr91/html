@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>light</title>
+	<link type="text/css" rel="stylesheet" href="dis/css/lightgallery.css" /> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="dis/js/lightgallery.js"></script>
+	<script src="dis/js/lg-thumbnail.min.js"></script>
+	<style>
+		.xxxx{ height: 90%; }
+		.xxxxbtn {     width: 96%;
+    padding: 10px;
+    margin: 10px 2%;
+    height: 50px;
+    border-radius: 6px;
+    background: #81D4FA;
+    font-size: 20px;
+    line-height: 20px; }
+	</style>
+	<!-- <script src="dis/js/lg-fullscreen.min.js"></script> -->
+</head>
+<body>
+	<div id="lightgallery" style="height: 100px;">
+		<a href="img/Screenshot (11).png"><img src="img/Screenshot (18).png" style="max-height: 100%;" /></a>
+		<a href="img/Screenshot (12).png"><img src="img/Screenshot (19).png" style="max-height: 100%;display: none;" /></a>
+		<a href="img/Screenshot (13).png"><img src="img/Screenshot (17).png" style="max-height: 100%;display: none;" /></a>
+	</div>
+	<script type="text/javascript">
+		// var lg
+		// var $lg = $('#lightgallery').lightGallery();
+ 
+// $lg.lightGallery();
+    	lightGallery(document.getElementById('lightgallery'),{
+    		addClass: 'xxxx',
+    	});
+    	$(document).on( "click", "#lightgallery", function(e){
+    		setTimeout(
+    			function(){
+    				$(document).find(".xxxx").append("<button class='xxxxbtn'>В корзину</button>")
+    			}
+    		,300);
+    	});
+    	$(document).on("click", ".xxxxbtn", function(e){
+    		console.log(5555);
+    	});
+	</script>
+</body>
+</html>
