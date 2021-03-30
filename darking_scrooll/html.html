@@ -1,0 +1,26 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div style="width: 100%; height: 1483px;background: red;">
+    111
+</div>
+<div class="xvideo" style="background-color: rgb(255, 255, 255);">
+    222
+</div>
+<div style="width: 100%; height: 830px;background: green;">
+    333
+</div>
+
+<style>
+    .xvideo { width: 100%; height: 720px; }
+</style>
+
+<script>
+    var wnd = $(window),
+    opacityControl = $('.xvideo');
+wnd.scroll(function(){
+    let proc = opacityControl.get(0).getBoundingClientRect();
+    let cur_c = 255+(proc.y-screen.height/2);
+    cur_c = cur_c>255?255:cur_c<0?0:cur_c;
+    let cur_s = "rgb("+cur_c+","+cur_c+","+cur_c+")";
+    opacityControl.css("backgroundColor", cur_s);
+});
+</script>
