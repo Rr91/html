@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CopyClick</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<button id="rcop">Click ME</button>
+	<div id="js-copy">
+		
+		<div class="ppp" style="border:1px solid red;padding: 10px;margin:10px;">
+			<p class="js-copy-target">1111</p>
+			<hr>
+		</div>
+
+		<div class="ppp" style="border:1px solid red;padding: 10px;margin:10px;">
+			<p class="js-copy-target">2222</p>
+			<hr>
+		</div>
+
+	</div>
+
+
+	<script>
+		function copyToClipboard(str) 
+		{
+			var area = document.createElement('textarea');
+			document.body.appendChild(area);
+		    area.value = str;
+		    area.select();
+		    document.execCommand("copy");
+		 	document.body.removeChild(area);
+		}
+
+		$(document).on('click', "#rcop", function(e){copyToClipboard( $('#js-copy').text());}); 
+
+
+
+		$(document).on('dblclick', ".js-copy-target", function(e){
+
+		 	let text = $(this).text();
+
+		 	let text_el = document.createElement('textarea');
+		 	text_el.className = 'text_el';
+
+		 	$(text_el).val(text);
+		 	$(text_el).insertAfter(this);		 	
+		 	$(this).remove();
+
+		 });
+
+		$(document).on('keyup', ".text_el", function(e){
+			if(e.keyCode == 27){
+		 		let text_el = document.createElement('p');
+		 		text_el.className = 'js-copy-target';
+				$(text_el).text($(this).val());
+				$(text_el).insertAfter(this);		 	
+				$(this).remove();
+			}
+		});
+
+
+	</script>
+</body>
+</html>
